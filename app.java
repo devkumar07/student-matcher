@@ -16,12 +16,16 @@ public class app{
     Scanner input = new Scanner(System.in);
     System.out.println("Enter the roster");
     String data_student="data/"+input.nextLine();
+    System.out.println("Enter the project");
+    String data_project="data/"+input.nextLine();
     ArrayList<Student> roster = new ArrayList<Student>();
+    ArrayList<String> project_list = new ArrayList<String>();
     String first_name="";
     String last_name="";
     String email="";
     try {
         BufferedReader read_student = new BufferedReader( new FileReader(data_student));
+        BufferedReader read_project = new BufferedReader( new FileReader(data_project));
         String strLine = null;
         StringTokenizer st = null;
         int lineNumber = 0, tokenNumber = 0;
@@ -71,6 +75,24 @@ public class app{
       }
         lineNumber=0;
         tokenNumber=0;
+        while((data_project = read_project.readLine()) != null)
+        {
+          lineNumber++;
+          //break comma separated line using ","
+          st = new StringTokenizer(data_project, ",");
+
+          while(st.hasMoreTokens())
+          {
+            //display csv values
+            tokenNumber++;
+            String value= st.nextToken();
+            if(tokenNumber==1){
+              project_list.add(value);
+            }
+          }
+          //reset token number
+          tokenNumber = 0;
+        }
       }
   catch (FileNotFoundException e) {
     			// TODO Auto-generated catch block
@@ -79,5 +101,8 @@ public class app{
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
+        /*System.out.println(roster.get(1).get_first_name());
+        System.out.println(roster.get(1).get_pref());
+        System.out.println(project_list.get(1));*/
   }
 }
