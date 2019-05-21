@@ -4,13 +4,15 @@ public class Student {
   private String email_id;
   private String timestamp;
   private ArrayList<int[]> preferances = new ArrayList<int[]>();
-
+  private int net_score;
+  
   public Student(String first, String last, String email, String time, ArrayList pref) {
     first_name = first;
     last_name = last;
     email_id = email;
     timestamp = time;
     preferances = pref;
+    //net_score = summ of all preferances
   }
 
   public Student(Student list) {
