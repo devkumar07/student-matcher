@@ -1,26 +1,28 @@
+import java.util.ArrayList;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.StringTokenizer;
+import java.util.Scanner;
+import java.io.PrintWriter;
 public class Student {
   private String first_name;
   private String last_name;
-  private String email_id;
-  private String timestamp;
-  private ArrayList<int[]> preferances = new ArrayList<int[]>();
-  private int net_score;
-  
-  public Student(String first, String last, String email, String time, ArrayList pref) {
-    first_name = first;
-    last_name = last;
-    email_id = email;
-    timestamp = time;
-    preferances = pref;
-    //net_score = summ of all preferances
-  }
+  private String email;
+  private ArrayList<Integer> preferences = new ArrayList<Integer>();
 
-  public Student(Student list) {
-    this.first_name = list.first_name;
-    this.last_name = list.last_name;
-    this.email_id = list.email_id;
-    this.timestamp = list.timestamp;
-  }
+  public Student(String first, String last, String email, ArrayList<Integer> preferences){
+      this.first_name = first;
+      this.last_name = last;
+      this.email = email;
+      this.preferences = preferences;
+    }
 
   public String get_first_name() {
     return first_name;
@@ -31,14 +33,12 @@ public class Student {
   }
 
   public String get_email_id() {
-    return email_id;
+    return email;
   }
-
-  public String get_Time() {
-    return timestamp;
-  }
-
-  public ArrayList get_preferances() {
-    return preferances;
+  public int get_pref(){
+    for(int i=0; i<preferences.size(); i++){
+      System.out.println(preferences.get(i));
+    }
+    return 100;
   }
 }
