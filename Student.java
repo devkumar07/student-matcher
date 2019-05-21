@@ -24,21 +24,27 @@ public class Student {
       this.preferences = preferences;
     }
 
-  public String get_first_name() {
+  public String get_first_name() { //Returns first name
     return first_name;
   }
 
-  public String get_last_name() {
+  public String get_last_name() { //Returns last name
     return last_name;
   }
 
-  public String get_email_id() {
+  public String get_email_id() { //Returns email
     return email;
   }
-  public int get_pref(){
+  public int get_pref(){ //Returns the list of preference in numeric for a particular student
     for(int i=0; i<preferences.size(); i++){
       System.out.println(preferences.get(i));
     }
     return 100;
+  }
+  public int get_size(){ //Returns the length of the preference list
+    return preference.size();
+  }
+  public int get_score(int pos){ //Returns the specific score for the particular project
+    return preference.get(pos);
   }
 }
