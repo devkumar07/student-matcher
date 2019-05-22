@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
 public class Matcher{
-  public int get_net_score(ArrayList<Student> roster, int student){
+  public static int get_net_score(ArrayList<Student> roster, int student){
     int net_score=0;
     for(int i=0; i<roster.get(student).get_size();i++){
         net_score+=roster.get(student).get_score(i);
@@ -22,25 +22,37 @@ public class Matcher{
     return net_score;
   }
   //This method will sort the list by the preference that student puts
-  public ArrayList<Student> sort_by_preference(ArrayList<Student> roster, int project_id){
+  public static ArrayList<Student> sort_by_preference(ArrayList<Student> roster, int project_id){
     ArrayList<Student> final_list = new ArrayList<Student>();
     ArrayList<Student> temp = roster;
     int index = 0;
-    for(int i=0;i<temp.size();i++){
-      for(int j=i+1;j<temp.size();j++){
-          if(temp.get(j).get_score(project_id)>temp.get(i).get_score(project_id)){
+    for(int i=temp.size()-1;i>0;i--){
+      index=0;
+      for(int j=1;j<=i;j++){
+          if(temp.get(j).get_score(project_id)<temp.get(index).get_score(project_id)){
             index=j;
           }
       }
-      final_list.add(temp.get(index));
-      temp.remove(index);
+      Student temp1 = temp.get(index);
+      temp.set(index,temp.get(i));
+      temp.set(i,temp1);
     }
-    return final_list;
+    return temp;
   }
-  public ArrayList<Student> sort_by_netscore(ArrayList<Student> roster){
-
+  public int range(ArrayList<Student> roster, int target, int start, int project_id){
+    int r=0;
+    int s=start;
+    while(roster.get(s).get_score(project_id)==target){
+      r++;
+    }
+    return r;
   }
-  public ArrayList<Student> match(ArrayList<Student> roster, int project){
+  /*public ArrayList<Student> sort_by_netscore(ArrayList<Student> roster, int start, int end){
 
+  }*/
+  public static ArrayList<Student> match(ArrayList<Student> roster, int project){
+    ArrayList<Student> fl=sort_by_preference(roster,project);
+    System.out.println(fl);
+    return fl;
   }
 }

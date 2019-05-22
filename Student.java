@@ -11,7 +11,7 @@ import java.io.Reader;
 import java.util.StringTokenizer;
 import java.util.Scanner;
 import java.io.PrintWriter;
-public class Student {
+public class Student{
   private String first_name;
   private String last_name;
   private String email;
@@ -42,9 +42,12 @@ public class Student {
     return 100;
   }
   public int get_size(){ //Returns the length of the preference list
-    return preference.size();
+    return preferences.size();
   }
   public int get_score(int pos){ //Returns the specific score for the particular project
-    return preference.get(pos);
+    return preferences.get(pos);
+  }
+  public String toString(){
+    return first_name+";"+this.get_score(0);
   }
 }
