@@ -106,6 +106,8 @@ public class app{
         System.out.println(roster.get(1).get_first_name());
         System.out.println(roster.get(1).get_score(0));
         System.out.println(project_list.get(1));
-        ArrayList<Student> test = Matcher.match(roster,0);
+        Matcher test = new Matcher(roster);
+        test.match(0);
+        //ArrayList<Student> test = Matcher.match(roster,0);
   }
 }
