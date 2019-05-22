@@ -103,8 +103,9 @@ public class app{
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
-        /*System.out.println(roster.get(1).get_first_name());
-        System.out.println(roster.get(1).get_pref());
-        System.out.println(project_list.get(1));*/
+        System.out.println(roster.get(1).get_first_name());
+        System.out.println(roster.get(1).get_score(0));
+        System.out.println(project_list.get(1));
+        ArrayList<Student> test = Matcher.match(roster,0);
   }
 }
