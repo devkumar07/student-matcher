@@ -14,6 +14,10 @@ import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
 public class Matcher{
+  ArrayList<Student> roster;
+  public Matcher(ArrayList<Student> list){
+    this.roster=list;
+  }
   public static int get_net_score(ArrayList<Student> roster, int student){
     int net_score=0;
     for(int i=0; i<roster.get(student).get_size();i++){
@@ -21,58 +25,62 @@ public class Matcher{
     }
     return net_score;
   }
-  //This method will sort the list by the preference that student puts
-  public static ArrayList<Student> sort_by_preference(ArrayList<Student> roster, int project_id){
-    ArrayList<Student> temp = roster;
-    int index = 0;
-    for(int i=temp.size()-1;i>0;i--){
-      index=0;
-      for(int j=1;j<=i;j++){
-          if(temp.get(j).get_score(project_id)<temp.get(index).get_score(project_id)){
-            index=j;
-          }
-      }
-      Student temp1 = temp.get(index);
-      temp.set(index,temp.get(i));
-      temp.set(i,temp1);
+  public static void merge(ArrayList<Student> left, ArrayList<Student> right, ArrayList<Student> roster) {
+        int leftIndex = 0;
+        int rightIndex = 0;
+        int k = 0;
+        while (leftIndex < left.size() && rightIndex < right.size()) {
+            if (get_net_score(left,leftIndex)<=get_net_score(right,rightIndex)){
+                roster.set(k, left.get(leftIndex));
+                leftIndex++;
+            }
+            else {
+                roster.set(k, right.get(rightIndex));
+                rightIndex++;
+            }
+            k++;
+        }
+
+        ArrayList<Student> rest;
+        int restIndex;
+        if (leftIndex >= left.size()) {
+            rest = right;
+            restIndex = rightIndex;
+        } else {
+            rest = left;
+            restIndex = leftIndex;
+        }
+        for (int i=restIndex; i<rest.size(); i++) {
+            roster.set(k, rest.get(i));
+            k++;
+        }
     }
-    return temp;
-  }
-  public static int range(ArrayList<Student> roster, int target, int start, int project_id){
-    int r=0;
-    int s=start;
-    while(roster.get(s).get_score(project_id)==target){
-      s++;
-      r++;
+  public static ArrayList<Student> sort_by_netscore(ArrayList<Student> roster) {
+    ArrayList<Student> left = new ArrayList<Student>();
+    ArrayList<Student> right = new ArrayList<Student>();
+    int middle;
+    if (roster.size() == 1) {
+        return roster;
     }
-    return r;
-  }
-  public static ArrayList<Student> sort_by_netscore(ArrayList<Student> roster, int start, int end){
-    ArrayList<Student> temp = roster;
-    int index = 0;
-    for(int i=start;i<end;i++){
-      index=i;
-      for(int j=i+1;j<end;j++){
-          if(get_net_score(temp,j)<get_net_score(temp,index)){
-            index=j;
-          }
-      }
-      Student temp1 = temp.get(index);
-      temp.set(index,temp.get(i));
-      temp.set(i,temp1);
+    else {
+        middle = roster.size()/2;
+        for (int i=0; i<middle; i++) {
+                left.add(roster.get(i));
+        }
+        for (int i=middle; i<roster.size(); i++) {
+                right.add(roster.get(i));
+        }
+        left  = sort_by_netscore(left);
+        right = sort_by_netscore(right);
+        merge(left, right, roster);
     }
-    return temp;
-  }
-  public static ArrayList<Student> match(ArrayList<Student> roster, int project){
-    //All the code in here is used for testing the algorithm 
-    ArrayList<Student> fl = sort_by_preference(roster,project);
-    System.out.println("Sorting by preference");
-    System.out.println(fl);
-    int end = range(roster,5,0,0);
-    System.out.println("end="+end);
-    fl=sort_by_netscore(fl,0,end);
-    System.out.println("Sorting by netscore");
-    System.out.println(fl);
-    return fl;
+    return roster;
+}
+  public void match(int project){
+    //All the code in here is used for testing the algorithm
+      System.out.println("before sorting");
+      System.out.println(this.roster);
+      System.out.println("after sorting");
+      System.out.println(sort_by_netscore(this.roster));
   }
 }

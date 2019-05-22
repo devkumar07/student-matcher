@@ -48,6 +48,6 @@ public class Student{
     return preferences.get(pos);
   }
   public String toString(){
-    return first_name+";"+this.get_score(0);
+    return first_name+";"+email;
   }
 }
