@@ -15,6 +15,7 @@ public class Student{
   private String first_name;
   private String last_name;
   private String email;
+  private String team;
   private ArrayList<Integer> preferences = new ArrayList<Integer>();
 
   public Student(String first, String last, String email, ArrayList<Integer> preferences){
@@ -22,6 +23,7 @@ public class Student{
       this.last_name = last;
       this.email = email;
       this.preferences = preferences;
+      this.team = "N/A";
     }
 
   public String get_first_name() { //Returns first name
@@ -34,6 +36,15 @@ public class Student{
 
   public String get_email_id() { //Returns email
     return email;
+  }
+  public void set_team(String t){
+    this.team=t;
+  }
+  public String get_team(){
+    return team;
+  }
+  public ArrayList<Integer> get_preferences(){
+    return preferences;
   }
   public int get_pref(){ //Returns the list of preference in numeric for a particular student
     for(int i=0; i<preferences.size(); i++){
@@ -48,6 +59,6 @@ public class Student{
     return preferences.get(pos);
   }
   public String toString(){
-    return first_name+";"+email;
+    return first_name+";"+get_team();
   }
 }
