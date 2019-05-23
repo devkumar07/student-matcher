@@ -123,6 +123,7 @@ public class Matcher{
     this.roster=sort_by_netscore(this.roster);
     int[] capacity = new int[size];
     int max = this.roster.size()/size;
+    max=max+1;
     for(int k=0; k<capacity.length;k++){
       capacity[k]=0;
     }
