@@ -72,7 +72,6 @@ public class app{
             }
         }
         roster.add(new Student(first_name,last_name,email,preferences));
-        //reset token number
         tokenNumber = 0;
       }
         lineNumber=0;
@@ -80,19 +79,16 @@ public class app{
         while((data_project = read_project.readLine()) != null)
         {
           lineNumber++;
-          //break comma separated line using ","
           st = new StringTokenizer(data_project, ",");
 
           while(st.hasMoreTokens())
           {
-            //display csv values
             tokenNumber++;
             String value= st.nextToken();
             if(tokenNumber==1){
               project_list.add(value);
             }
           }
-          //reset token number
           tokenNumber = 0;
         }
       }
@@ -103,11 +99,7 @@ public class app{
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
-        System.out.println(roster.get(1).get_first_name());
-        System.out.println(roster.get(1).get_score(0));
-        System.out.println(project_list.get(1));
-        Matcher test = new Matcher(roster);
-        test.match(0);
-        //ArrayList<Student> test = Matcher.match(roster,0);
+        Matcher test = new Matcher(roster,project_list);
+        test.match(project_list.size());
   }
 }
