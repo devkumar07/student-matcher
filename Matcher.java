@@ -29,6 +29,24 @@ public class Matcher{
     }
     return net_score;
   }
+  //This method removes duplicate entries from the list
+  public void remove_duplicates(){
+    int i=0;
+    int j=0;
+    while(i<this.roster.size()-1){
+      j=i+1;
+      while(j<this.roster.size()){
+        if(this.roster.get(i).get_email_id().equals(this.roster.get(j).get_email_id())){
+          this.roster.remove(i);
+          j=i+1;
+        }
+        else{
+          j++;
+        }
+      }
+      i++;
+    }
+  }
   // This method is a helper method for the sort by netscore
   public void merge(ArrayList<Student> left, ArrayList<Student> right, ArrayList<Student> roster) {
         int leftIndex = 0;
@@ -120,6 +138,7 @@ public class Matcher{
   }
   //This method performs the matching for students with the best team
   public void match(int size){
+    this.remove_duplicates();
     this.roster=sort_by_netscore(this.roster);
     int[] capacity = new int[size];
     double temp_max = ((double)this.roster.size())/size;
@@ -145,17 +164,59 @@ public class Matcher{
     String fileName = "Student-Team.csv";
     try{
     					 PrintWriter outputStream = new PrintWriter(fileName);
+               StringBuffer csvHeader = new StringBuffer("");
+               StringBuffer csvData = new StringBuffer("");
+               csvHeader.append("Students with the corresponding team");
+               csvHeader.append("\n");
+               csvData.append('\n');
+
+               outputStream.write(csvHeader.toString());
+
+               for(int i=0; i<this.Projects.size();i++){
+                 String proj = this.Projects.get(i);
+                 csvData.append("Project:");
+                 csvData.append(',');
+                 csvData.append(this.Projects.get(i));
+                 csvData.append('\n');
+                 csvData.append('\n');
+                 csvData.append("First Name");
+                 csvData.append(',');
+                 csvData.append("Last Name");
+                 csvData.append(',');
+                 csvData.append("Email");
+                 csvData.append('\n');
+                 for(int j=0; j<this.roster.size(); j++){
+                   if(this.roster.get(j).get_team().equals(proj)){
+                     csvData.append(this.roster.get(j).get_first_name());
+                     csvData.append(',');
+                     csvData.append(this.roster.get(j).get_last_name());
+                     csvData.append(',');
+                     csvData.append(this.roster.get(j).get_email_id());
+                     csvData.append('\n');
+                   }
+                 }
+                 csvData.append('\n');
+               }
+               outputStream.write(csvData.toString());
+    					 outputStream.close();
+    		     }
+    		     catch(FileNotFoundException e){
+    		       e.printStackTrace();
+    		     }
+    /*String fileName = "Student-Team.csv";
+    try{
+    					 PrintWriter outputStream = new PrintWriter(fileName);
     					 outputStream.println("Student with the corresponding teams");
                outputStream.println();
                for(int i=0; i<this.Projects.size();i++){
                  String proj = this.Projects.get(i);
                  outputStream.println("Project: "+this.Projects.get(i));
                  outputStream.println();
-                 outputStream.println("First Name | \tLast Name |\tEmail");
+                 outputStream.println("First Name | Last Name | Email");
                  outputStream.println();
                  for(int j=0; j<this.roster.size(); j++){
                    if(this.roster.get(j).get_team().equals(proj)){
-                     outputStream.println(this.roster.get(j).get_first_name()+" |\t "+this.roster.get(j).get_last_name()+" | \t "+this.roster.get(j).get_email_id());
+                     outputStream.println(this.roster.get(j).get_first_name()+" | "+this.roster.get(j).get_last_name()+" | "+this.roster.get(j).get_email_id());
                    }
                  }
                  outputStream.println("---------------------------------");
@@ -165,6 +226,6 @@ public class Matcher{
     		     }
     		     catch(FileNotFoundException e){
     		       e.printStackTrace();
-    		     }
+    		     }*/
   }
 }
