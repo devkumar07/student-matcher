@@ -100,6 +100,8 @@ public class app{
     			e.printStackTrace();
     		}
         Matcher test = new Matcher(roster,project_list);
-        test.match(6);
+        test.match(project_list.size());
+        test.output();
+        System.out.println("Done!");
   }
 }
