@@ -122,8 +122,8 @@ public class Matcher{
   public void match(int size){
     this.roster=sort_by_netscore(this.roster);
     int[] capacity = new int[size];
-    int max = this.roster.size()/size;
-    max=max+1;
+    double temp_max = ((double)this.roster.size())/size;
+    int max = (int)Math.ceil(temp_max);// This needs to be clarified
     for(int k=0; k<capacity.length;k++){
       capacity[k]=0;
     }
@@ -138,7 +138,33 @@ public class Matcher{
         }
       }
     }
-    System.out.println("Final list");
-    System.out.println(this.roster);
+    /*System.out.println("Final list");
+    System.out.println(this.roster);*/
+  }
+  public void output(){
+    String fileName = "Student-Team.csv";
+    try{
+    					 PrintWriter outputStream = new PrintWriter(fileName);
+    					 outputStream.println("Student with the corresponding teams");
+               outputStream.println();
+               for(int i=0; i<this.Projects.size();i++){
+                 String proj = this.Projects.get(i);
+                 outputStream.println("Project: "+this.Projects.get(i));
+                 outputStream.println();
+                 outputStream.println("First Name | \tLast Name |\tEmail");
+                 outputStream.println();
+                 for(int j=0; j<this.roster.size(); j++){
+                   if(this.roster.get(j).get_team().equals(proj)){
+                     outputStream.println(this.roster.get(j).get_first_name()+" |\t "+this.roster.get(j).get_last_name()+" | \t "+this.roster.get(j).get_email_id());
+                   }
+                 }
+                 outputStream.println("---------------------------------");
+                 outputStream.println();
+               }
+    					 outputStream.close();
+    		     }
+    		     catch(FileNotFoundException e){
+    		       e.printStackTrace();
+    		     }
   }
 }

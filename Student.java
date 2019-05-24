@@ -46,7 +46,7 @@ public class Student{
   public ArrayList<Integer> get_preferences(){
     return preferences;
   }
-  public int get_pref(){ //Returns the list of preference in numeric for a particular student
+  public int get_pref(){ //Returns the list of preference in numeric for a particular student; Was used for testing 
     for(int i=0; i<preferences.size(); i++){
       System.out.println(preferences.get(i));
     }
