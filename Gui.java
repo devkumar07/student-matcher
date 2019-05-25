@@ -3,41 +3,40 @@ import java.awt.*;
 class Gui {
     public static void main(String args[]) {
 
-        //Creating the Frame
-        JFrame frame = new JFrame("Chat Frame");
+        JFrame frame = new JFrame("I2G Student Matcher");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
+        frame.setSize(300,150);
 
-        //Creating the MenuBar and adding components
-        JMenuBar mb = new JMenuBar();
-        JMenu m1 = new JMenu("FILE");
-        JMenu m2 = new JMenu("Help");
-        mb.add(m1);
-        mb.add(m2);
-        JMenuItem m11 = new JMenuItem("Open");
-        JMenuItem m22 = new JMenuItem("Save as");
-        m1.add(m11);
-        m1.add(m22);
+        JLabel lbl_student_roster = new JLabel("Student Roster");
+        JTextField tf_student_roster = new JTextField(20);
+        lbl_student_roster.setLabelFor(tf_student_roster);
+ 
+        JLabel lbl_project_roster = new JLabel("Project Roster");
+        JTextField tf_project_roster = new JTextField(20);
+        lbl_project_roster.setLabelFor(tf_project_roster);
 
-        //Creating the panel at bottom and adding components
-        JPanel panel = new JPanel(); // the panel is not visible in output
-        JLabel label = new JLabel("Enter Text");
-        JTextField tf = new JTextField(10); // accepts upto 10 characters
-        JButton send = new JButton("Send");
-        JButton reset = new JButton("Reset");
-        panel.add(label); // Components Added using Flow Layout
-        panel.add(label); // Components Added using Flow Layout
-        panel.add(tf);
-        panel.add(send);
-        panel.add(reset);
+        JPanel pan_input = new JPanel();
+        pan_input.setLayout(new SpringLayout());
+ 
+        pan_input.add(lbl_student_roster);
+        pan_input.add(tf_student_roster);
+        pan_input.add(lbl_project_roster);
+        pan_input.add(tf_project_roster);
 
-        // Text Area at the Center
-        JTextArea ta = new JTextArea();
+        SpringUtilities.makeCompactGrid(pan_input,
+        2, 2,  //rows, cols
+        6, 6,  //initX, initY
+        6, 6); //xPad, yPad        
 
-        //Adding Components to the frame.
-        frame.getContentPane().add(BorderLayout.SOUTH, panel);
-        frame.getContentPane().add(BorderLayout.NORTH, mb);
-        frame.getContentPane().add(BorderLayout.CENTER, ta);
+        JPanel pan_buttons = new JPanel();
+
+        JButton but_match = new JButton("Match");
+
+        pan_buttons.add(but_match);
+
+       
+        frame.getContentPane().add(pan_input, BorderLayout.PAGE_START);
+        frame.getContentPane().add(pan_buttons, BorderLayout.PAGE_END);
         frame.setVisible(true);
     }
 }
