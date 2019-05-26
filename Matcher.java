@@ -157,11 +157,9 @@ public class Matcher{
         }
       }
     }
-    /*System.out.println("Final list");
-    System.out.println(this.roster);*/
   }
   public void output(){
-    String fileName = "Student-Team.csv";
+    String fileName = "data/output/Student-Team.csv";
     try{
     					 PrintWriter outputStream = new PrintWriter(fileName);
                StringBuffer csvHeader = new StringBuffer("");
@@ -203,29 +201,5 @@ public class Matcher{
     		     catch(FileNotFoundException e){
     		       e.printStackTrace();
     		     }
-    /*String fileName = "Student-Team.csv";
-    try{
-    					 PrintWriter outputStream = new PrintWriter(fileName);
-    					 outputStream.println("Student with the corresponding teams");
-               outputStream.println();
-               for(int i=0; i<this.Projects.size();i++){
-                 String proj = this.Projects.get(i);
-                 outputStream.println("Project: "+this.Projects.get(i));
-                 outputStream.println();
-                 outputStream.println("First Name | Last Name | Email");
-                 outputStream.println();
-                 for(int j=0; j<this.roster.size(); j++){
-                   if(this.roster.get(j).get_team().equals(proj)){
-                     outputStream.println(this.roster.get(j).get_first_name()+" | "+this.roster.get(j).get_last_name()+" | "+this.roster.get(j).get_email_id());
-                   }
-                 }
-                 outputStream.println("---------------------------------");
-                 outputStream.println();
-               }
-    					 outputStream.close();
-    		     }
-    		     catch(FileNotFoundException e){
-    		       e.printStackTrace();
-    		     }*/
   }
 }
