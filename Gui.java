@@ -69,14 +69,8 @@ public class Gui implements ActionListener {
         String student = this.getProjectFieldText(); // "roster.csv"; //instance.getProjectFieldText();
         String projects = this.getStudentFieldText();// "projects.csv"; //instance.getStudentFieldText();
 
-        app.apprun(student, projects);
+        Matcher.matchRun(student, projects);
 
         JOptionPane.showMessageDialog(null, "Done!");
     }
-
-    public static void main(String args[]) {
-        Gui gui = new Gui();
-        gui.launchFrame();
-    }
 }
-
